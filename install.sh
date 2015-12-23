@@ -35,13 +35,3 @@ crontab -l | { cat; echo "* * * * * /opt/pi-hotspot/ap.sh >> /var/log/hotspot.lo
 
 echo "Done"
 echo "Will be first run in `expr 60 - $(date +%S)` seconds"
-
-
-auto lo
-
-iface lo inet loopback
-iface eth0 inet dhcp
-
-allow-hotplug wlan0
-iface wlan0 inet manual
-wpa-roam /etc/wpa_supplicant/wpa_supplicant.conf
