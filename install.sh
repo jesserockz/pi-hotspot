@@ -1,16 +1,18 @@
 #!/bin/bash
 
 set -e
-HOTSPOT_ROOT="/opt/pi-hotspot/"
+HOTSPOT="pi-hotspot"
 
 VERSION="0.1.0"
 
-mkdir -p "$HOTSPOT_ROOT"
+cd "/opt/"
 
-cd "$HOTSPOT_ROOT"
+rm -rf "$HOTSPOT"
 
 echo "Download Pi Hotspot"
-curl -L https://github.com/jesserockz/pi-hotspot/archive/v$VERSION.tar.gz | tar xzf -
+curl -L "https://github.com/jesserockz/$HOTSPOT/archive/v$VERSION.tar.gz" | tar xzf -
+
+mv "$HOTSPOT-$VERSION" "$HOTSPOT"
 
 echo "Updating packages..."
 apt-get update
