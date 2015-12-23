@@ -9,7 +9,7 @@ cd "/opt/"
 
 rm -rf "$HOTSPOT"
 
-echo "Download Pi Hotspot"
+echo "Downloading Pi Hotspot"
 curl -L "https://github.com/jesserockz/$HOTSPOT/archive/v$VERSION.tar.gz" | tar xzf -
 
 mv "$HOTSPOT-$VERSION" "$HOTSPOT"
@@ -19,6 +19,10 @@ apt-get update
 apt-get upgrade -y
 echo "Installing required packages..."
 apt-get install hostapd dnsmasq libnl-dev -y
+
+echo "Stopping services"
+service hostapd stop
+service dnsmasq stop
 
 echo "Removing hostapd and dnsmasq from startup sequence"
 update-rc.d hostapd remove
