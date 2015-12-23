@@ -10,7 +10,7 @@ HostAPDIP='10.0.0.1'
 echo "-----------------------------------"
 echo "Checking connectivity of $Interface"
 NetworkUp=`/sbin/ifconfig $Interface`
-IP=`echo "$NetworkUp" | grep inet | wc -l`
+IP=`echo "$NetworkUp" | grep inet | grep -v inet6 | wc -l`
 
 serial=`cat /proc/cpuinfo | tail -c 5`
 echo -e "interface=wlan0\ndriver=nl80211\nssid=Zer0-$serial\nhw_mode=g\nchannel=11\nwpa=2\nwpa_passphrase=zer0config\nwpa_key_mgmt=WPA-PSK\nwpa_pairwise=TKIP\nrsn_pairwise=CCMP" > /etc/hostapd/hostapd.conf
