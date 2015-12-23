@@ -16,7 +16,6 @@ mv "$HOTSPOT-$VERSION" "$HOTSPOT"
 
 echo "Updating packages..."
 apt-get update
-apt-get upgrade -y
 echo "Installing required packages..."
 apt-get install hostapd dnsmasq libnl-dev -y
 
