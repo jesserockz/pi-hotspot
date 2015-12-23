@@ -25,12 +25,10 @@ update-rc.d hostapd remove
 update-rc.d dnsmasq remove
 
 echo "Set config for hostapd in init.d file"
-awk '/DAEMON_CONF=/ { print "DAEMON_CONF=/etc/hostapd/hostapd.conf"; next }1' /etc/init.d/hostapd | tee /etc/init.d/hosted
+awk '/DAEMON_CONF=/ { print "DAEMON_CONF=/etc/hostapd/hostapd.conf"; next }1' /etc/init.d/hostapd | tee /etc/init.d/hostapd > /dev/null
 
 echo "Set wlan0 to auto instead of allow-hotplug"
-awk '/allow-hotplug wlan0/ { print "auto wlan0"; next }1' /etc/network/interfaces | tee /etc/network/interfaces
-
-
+awk '/allow-hotplug wlan0/ { print "auto wlan0"; next }1' /etc/network/interfaces | tee /etc/network/interfaces > /dev/null
 
 echo "Add cronjob to check for wifi every minute"
 crontab -l | { cat; echo "* * * * * /opt/pi-hotspot/ap.sh >> /var/log/hotspot.log 2>&1"; } | crontab -
