@@ -5,6 +5,8 @@ HOTSPOT_ROOT="/opt/pi-hotspot/"
 
 VERSION="0.1.0"
 
+mkdir -p "$HOTSPOT_ROOT"
+
 cd "$HOTSPOT_ROOT"
 
 echo "Download Pi Hotspot"
