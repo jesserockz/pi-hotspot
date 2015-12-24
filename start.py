@@ -29,12 +29,8 @@ def getAccessPoints():
     return access_points
 
 def setWifi(ssid, passw):
-    out = """\nnetwork={{\nssid="{0}"\npsk="{1}"\nproto=WPA\nkey_mgmt=WPA-PSK\npairwise=TKIP\nauth_alg=OPEN\n}}"""
-    out = out.format(ssid, passw)
-    with open("/etc/wpa_supplicant/wpa_supplicant.conf", "a") as myfile:
-        myfile.write(out)    
-    reboot = subprocess.Popen(['/sbin/reboot'], stdout=subprocess.PIPE)
-    reboot.communicate()
+    subprocess.call("/usr/bin/wpa_passphrase {0} {1} >> /etc/wpa_supplicant/wpa_supplicant.conf".format(ssid, passw), shell=True)
+    subprocess.call('/sbin/reboot')
         
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
